@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TCC Direto ao Ponto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:#f5f7fb;
+      color:#1e293b;
+      overflow-x:hidden;
+    }
+
+    html{
+      scroll-behavior:smooth;
+      
+    }
+
+    :root{
+      --primary:#2563eb;
+      --secondary:#0f172a;
+      --accent:#38bdf8;
+      --light:#ffffff;
+      --gray:#64748b;
+      --gradient:linear-gradient(135deg,#2563eb,#38bdf8);
+    }
+
+    header{
+      position:fixed;
+      top:0;
+      width:100%;
+      z-index:999;
+      background:rgba(15,23,42,0.85);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+
+    .navbar{
+      max-width:1300px;
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:18px 24px;
+    }
+
+    .logo{
+      color:white;
+      font-size:1.6rem;
+      font-weight:800;
+    }
+
+    .logo span{
+      color:var(--accent);
+    }
+
+    nav ul{
+      display:flex;
+      gap:28px;
+      list-style:none;
+    }
+
+    nav a{
+      text-decoration:none;
+      color:white;
+      font-weight:500;
+      transition:0.3s;
+    }
+
+    nav a:hover{
+      color:var(--accent);
+    }
+
+    .hero{
+      min-height:100vh;
+      background:
+        linear-gradient(rgba(15,23,42,0.78),rgba(15,23,42,0.9)),
+        url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop') center/cover;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:120px 20px 80px;
+      color:white;
+    }
+
+    .hero-content{
+      max-width:900px;
+      animation:fadeIn 1s ease;
+    }
+
+    .hero h1{
+      font-size:4rem;
+      line-height:1.1;
+      margin-bottom:24px;
+      font-weight:800;
+    }
+
+    .hero p{
+      font-size:1.2rem;
+      color:#dbeafe;
+      margin-bottom:36px;
+      line-height:1.8;
+    }
+
+    .btn-group{
+      display:flex;
+      gap:18px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      padding:15px 30px;
+      border-radius:50px;
+      text-decoration:none;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    .btn-primary{
+      background:var(--gradient);
+      color:white;
+      box-shadow:0 10px 25px rgba(37,99,235,0.3);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-3px);
+    }
+
+    .btn-outline{
+      border:2px solid white;
+      color:white;
+    }
+
+    .btn-outline:hover{
+      background:white;
+      color:var(--secondary);
+    }
+
+    section{
+      padding:100px 24px;
+    }
+
+    .container{
+      max-width:1250px;
+      margin:auto;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:60px;
+    }
+
+    .section-title h2{
+      font-size:2.8rem;
+      margin-bottom:14px;
+      color:var(--secondary);
+    }
+
+    .section-title p{
+      color:var(--gray);
+      max-width:760px;
+      margin:auto;
+      line-height:1.7;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:28px;
+    }
+
+    .card{
+      background:white;
+      padding:36px;
+      border-radius:24px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.06);
+      transition:0.3s;
+    }
+
+    .card:hover{
+      transform:translateY(-8px);
+    }
+
+    .icon{
+      width:75px;
+      height:75px;
+      border-radius:22px;
+      background:var(--gradient);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:white;
+      font-size:1.7rem;
+      font-weight:700;
+      margin-bottom:22px;
+    }
+
+    .card h3{
+      margin-bottom:14px;
+      color:var(--secondary);
+    }
+
+    .card p{
+      color:var(--gray);
+      line-height:1.8;
+    }
+
+    .timeline{
+      position:relative;
+      max-width:900px;
+      margin:auto;
+    }
+
+    .timeline::before{
+      content:'';
+      position:absolute;
+      left:50%;
+      top:0;
+      width:4px;
+      height:100%;
+      background:#cbd5e1;
+      transform:translateX(-50%);
+    }
+
+    .timeline-item{
+      position:relative;
+      width:50%;
+      padding:25px 40px;
+    }
+
+    .timeline-item:nth-child(odd){
+      left:0;
+      text-align:right;
+    }
+
+    .timeline-item:nth-child(even){
+      left:50%;
+    }
+
+    .timeline-content{
+      background:white;
+      padding:28px;
+      border-radius:22px;
+      box-shadow:0 10px 28px rgba(0,0,0,0.08);
+    }
+
+    .timeline-content h3{
+      margin-bottom:12px;
+    }
+
+    .timeline-content p{
+      color:var(--gray);
+      line-height:1.7;
+    }
+
+    .cta{
+      background:linear-gradient(135deg,#0f172a,#1e3a8a);
+      color:white;
+      text-align:center;
+      border-radius:30px;
+      padding:80px 30px;
+    }
+
+    .cta h2{
+      font-size:3rem;
+      margin-bottom:20px;
+    }
+
+    .cta p{
+      max-width:800px;
+      margin:auto auto 35px;
+      color:#dbeafe;
+      line-height:1.8;
+    }
+
+    footer{
+      background:#020617;
+      color:white;
+      padding:70px 24px 30px;
+    }
+
+    .footer-grid{
+      max-width:1200px;
+      margin:auto;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:40px;
+      margin-bottom:50px;
+    }
+
+    .footer-grid h3{
+      margin-bottom:18px;
+      color:var(--accent);
+    }
+
+    .footer-grid p,
+    .footer-grid a{
+      color:#cbd5e1;
+      text-decoration:none;
+      line-height:1.8;
+    }
+
+    .copyright{
+      text-align:center;
+      border-top:1px solid rgba(255,255,255,0.1);
+      padding-top:20px;
+      color:#94a3b8;
+    }
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(20px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    @media(max-width:900px){
+      .hero h1{
+        font-size:2.8rem;
+      }
+
+      nav ul{
+        gap:14px;
+      }
+
+      .timeline::before{
+        left:20px;
+      }
+
+      .timeline-item,
+      .timeline-item:nth-child(even),
+      .timeline-item:nth-child(odd){
+        width:100%;
+        left:0;
+        text-align:left;
+        padding-left:60px;
+        padding-right:0;
+      }
+
+      .cta h2{
+        font-size:2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  
+<header>
+  <div class="navbar">
+    <div class=><span><img src="" alt=""></span></div>
+
+    <nav>
+      <ul>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#etapas">Etapas</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Seu Trabalho Acadêmico organizado na graduação ou na pós-graduação.</h1>
+
+    <p>
+      Plataforma de orientação acadêmica para ajudar estudantes de Graduação e Pós-Graduação em todas as áreas do conhecimento.
+    </p>
+
+    <div class="btn-group">
+      <a href="#servicos" class="btn btn-primary">Começar Agora</a>
+      <a href="#etapas" class="btn btn-outline">Ver Etapas</a>
+    </div>
+  </div>
+</section>
+
+<section id="sobre">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Sobre a Plataforma</h2>
+      <p>
+        Um ambiente criado para facilitar o desenvolvimento do seu TCC, monografia, dissertação ou tese, com orientações práticas e supervisão técnica para elaboração do se trabalho acadêmico.
+      </p>
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <div class="icon">01</div>
+        <h3>Pesquisa com IA</h3>
+        <p>
+          Aprenda como buscar informações utilizando a IA através de prompts adequados.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">02</div>
+        <h3>Seleção para Pós-graduação</h3>
+        <p>
+          Prepare-se para o processo seletivo de mestrado e doutorado.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">03</div>
+        <h3>Normas ABNT</h3>
+        <p>
+          Orientações de formatação para facilitar a elaboração do trabalho.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="etapas">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Etapas do Trabalho Acadêmico</h2>
+      <p>
+        Um passo a passo simples para transformar sua ideia em um trabalho acadêmico completo.
+      </p>
+    </div>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>1. Escolha do Tema</h3>
+          <p>
+            Defina um tema relevante, atual e viável para sua pesquisa.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>2. Elaboração do Projeto de Pesquisa</h3>
+          <p>
+            Estruture o seu projeto de pesquisa de forma clara e coerente.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>3. Revisão Bibliográfica</h3>
+          <p>
+            Levantamento de autores, busca em base de dados, análise de concepções teóricas.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>4. Pesquisa de Campo</h3>
+          <p>
+            Escolha do instrumento de coleta de dados adequado a sua pesquisa.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>5. Suporte da Inteligência Artificial</h3>
+          <p>
+            Utilização da IA como ferramenta de suporte para sua pesquisa.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="servicos">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Serviços de Orientação</h2>
+      <p>
+        
+      </p>
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <h3>✔ Elaboração do trabalho acadêmico</h3>
+        <p>
+          Orientação para a elaboração do projeto de pesquisa de graduação, mestrado ou doutorado.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>✔ Elaboração de artigo científico</h3>
+        <p>
+          Orientação de pesquisa acadêmica para elaboração de artigo científico.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>✔ Orientação Online</h3>
+        <p>
+          Suporte para dúvidas acadêmicas e desenvolvimento do trabalho.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>✔ Revisão ABNT</h3>
+        <p>
+          Ajustes de normas, citações, referências e formatação final.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="cta">
+      <h2>Transforme seu trabalho acadêmico em um projeto de sucesso.</h2>
+
+      <p>
+        Receba orientações individuais sobre a organização do seu trabalho de acordo com as normas acadêmicas.
+      </p>
+
+      <a href="#contato" class="btn btn-primary">Entrar em Contato</a>
+    </div>
+  </div>
+</section>
+
+<footer id="contato">
+  <div class="footer-grid">
+
+    <div>
+      
+    <img src="Logo trabalho acadêmico.png" width="300" alt="">  
+        
+    </div>
+
+    <div>
+      <h3>Contato</h3>
+      <p>Email: juliano.parente@unesp.br</p>
+      <p>WhatsApp: (14) 99891-1969</p>
+      
+    </div>
+
+    <div>
+      <h3>Redes Sociais</h3>
+      <p>Instagram</p>
+      <p><a href="https://www.instagram.com/profjulianoparente/">https://www.instagram.com/profjulianoparente/</a></p>
+      <p>Youtube</p>
+      <p><a href="https://www.youtube.com/@TCCDiretoaoPonto">https://www.youtube.com/@TCCDiretoaoPonto</a></p>
+    </div>
+
+  </div>
+
+  <div class="copyright">
+    © 2026 - TCC Direto ao Ponto | Todos os direitos reservados.
+  </div>
+</footer>
+
+</body>
+</html>
